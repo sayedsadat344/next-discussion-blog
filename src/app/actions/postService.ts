@@ -70,14 +70,25 @@ export async function createPost(
         }
     }
 
-    const topic: Topic = await actions.getTopicBySlug(slug)
-    console.log('topic: ', topic);
+  
 
     const session = await auth();
     if (!session?.user) {
         return {
             errors: {
                 _form: ["Your must be loggedIn"]
+            }
+        };
+    }
+
+
+
+    const topic: Topic = await actions.getTopicBySlug(slug)
+
+    if(!topic){
+        return {
+            errors: {
+                _form: ["Topic Does not exist"]
             }
         };
     }

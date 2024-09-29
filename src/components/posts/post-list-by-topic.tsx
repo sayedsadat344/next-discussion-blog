@@ -12,10 +12,6 @@ export default async function PostListByTopic({ slug }: TopicSlugParam) {
 
     const renderedPosts = posts.map((post) => {
 
-
-        console.log('Posttsss: ',post);
-        
-
         return (
 
             <Card key={post.id} isPressable className="p-3">
@@ -42,7 +38,15 @@ export default async function PostListByTopic({ slug }: TopicSlugParam) {
 
     return (
         <div className="grid flex-wrap grid-cols-2 gap-2">
-            {renderedPosts}
+            {
+                posts.length > 0 ? renderedPosts : (
+                    <div className="col-span-2 p-4 text-center bg-gray-100 border border-gray-300 rounded-lg">
+                        <h2 className="text-lg font-semibold text-gray-700">No Posts Available</h2>
+                        <p className="text-gray-500">It seems there are no posts for this topic yet.</p>
+                       
+                    </div>
+                )
+            }
         </div>
     );
 }
